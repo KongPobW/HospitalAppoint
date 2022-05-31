@@ -117,17 +117,19 @@ public class SignIn extends JFrame {
 			ResultSet rs = con.createStatement().executeQuery(sqlSelect);
 			
 			if (rs.next()) {
-				
+
 				//**correct**
-				
+
 				//create reminded block
 				JOptionPane.showMessageDialog(null, "Sign In Successfully");
-				
+
 				dispose();
-				
+
 				Home hom = new Home(username, password);
 				hom.setVisible(true);
-				
+
+			} else if (username.getText().equals("") || pass_input.equals("")) {
+				JOptionPane.showMessageDialog(null, "Please type all information");
 			} else {
 				//incorrect
 				JOptionPane.showMessageDialog(null, "Incorrect, please try again");

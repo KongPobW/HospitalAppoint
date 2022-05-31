@@ -122,19 +122,25 @@ public class SignUp extends JFrame {
 			Connection con = db.onlyConDB();
 			
 			Statement stmt = con.createStatement();
-			
-			//create variable stored insert statement
-			String sqlInsert = "INSERT INTO Patient (`UseName`, `PatPass`, `PatName`) VALUES ('" + username.getText() + "', '" + pass_input + "', '" + name.getText() + "')";
-			
-			//run insert statement
-			stmt.execute(sqlInsert);
-			
-			JOptionPane.showMessageDialog(null, "Sign Up Successfully");
-			
-			dispose();
-			
-			Account acc = new Account();
-			acc.setVisible(true);
+
+			if (!username.getText().equals("") && !name.getText().equals("") && !pass_input.equals("")) {
+
+				//create variable stored insert statement
+				String sqlInsert = "INSERT INTO Patient (`UseName`, `PatPass`, `PatName`) VALUES ('" + username.getText() + "', '" + pass_input + "', '" + name.getText() + "')";
+
+				//run insert statement
+				stmt.execute(sqlInsert);
+
+				JOptionPane.showMessageDialog(null, "Sign Up Successfully");
+
+				dispose();
+
+				Account acc = new Account();
+				acc.setVisible(true);
+
+			} else {
+				JOptionPane.showMessageDialog(null, "Please type all information");
+			}
 			
 		} catch (SQLException e1) {
 			e1.printStackTrace();

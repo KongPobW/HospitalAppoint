@@ -80,7 +80,7 @@ public class Home extends JFrame {
 	}
 	
 	private void createSideBar(JTextField username, JPasswordField password) {
-		//create create side bar button
+		//create "create" sidebar button
 		JButton cre_sb = new JButton("");
 		cre_sb.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -98,7 +98,7 @@ public class Home extends JFrame {
 		cre_sb.setBounds(1, 240, 344, 58);
 		home.add(cre_sb);
 		
-		//create side bar cancel button
+		//create sidebar cancel button
 		JButton can_sb = new JButton("");
 		can_sb.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -116,7 +116,7 @@ public class Home extends JFrame {
 		can_sb.setBounds(1, 376, 344, 58);
 		home.add(can_sb);
 		
-		//create side bar view button
+		//create sidebar view button
 		JButton view_sb = new JButton("");
 		view_sb.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

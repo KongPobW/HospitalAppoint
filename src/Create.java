@@ -91,7 +91,7 @@ public class Create extends JFrame {
 		logOut.setBounds(1196, 5, 85, 86);
 		create.add(logOut);
 		
-		//create create button
+		//create button
 		JButton btn_cre = new JButton("");
 		btn_cre.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -145,7 +145,7 @@ public class Create extends JFrame {
 		time.setColumns(10);
 		
 		//create variable stored phone number
-		phone = new JTextField("0982592063");
+		phone = new JTextField("098xxxxxxx");
 		phone.addFocusListener(new FocusAdapter() {
 			public void focusGained(FocusEvent e) {
 				placeHolderPhoneGained();
@@ -164,7 +164,7 @@ public class Create extends JFrame {
 	}
 	
 	private void createSideBar(JTextField username, JPasswordField password) {
-		//create create side bar button
+		//create "create" sidebar button
 		JButton cre_sb = new JButton("");
 		cre_sb.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -182,7 +182,7 @@ public class Create extends JFrame {
 		cre_sb.setBounds(1, 240, 344, 58);
 		create.add(cre_sb);
 		
-		//create side bar cancel button
+		//create sidebar cancel button
 		JButton can_sb = new JButton("");
 		can_sb.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -200,7 +200,7 @@ public class Create extends JFrame {
 		can_sb.setBounds(1, 376, 344, 58);
 		create.add(can_sb);
 		
-		//create side bar view button
+		//create sidebar view button
 		JButton view_sb = new JButton("");
 		view_sb.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -234,11 +234,9 @@ public class Create extends JFrame {
 			
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM Department");
-			
-			if (true) {
-				dept.addItem("Choose...");
-			}
-			
+
+			dept.addItem("Choose...");
+
 			while (rs.next()) {
 				//create variable stored result in a record
 				String deptName = rs.getString("Dname");
@@ -285,7 +283,7 @@ public class Create extends JFrame {
 	}
 	
 	private void placeHolderPhoneGained() {
-		if (phone.getText().equals("0982592063")) {
+		if (phone.getText().equals("098xxxxxxx")) {
 			phone.setText("");
 			phone.setForeground(Color.BLACK);
 			phone.setFont(new Font("Arial", Font.PLAIN, 28));
@@ -296,7 +294,7 @@ public class Create extends JFrame {
 		if (phone.getText().equals("")) {
 			phone.setForeground(Color.LIGHT_GRAY);
 			phone.setFont(new Font("Arial", Font.ITALIC, 28));
-			phone.setText("0982592063");
+			phone.setText("098xxxxxxx");
 		}
 	}
 	
@@ -381,10 +379,10 @@ public class Create extends JFrame {
 			hom.setVisible(true);
 			
 		} catch (SQLException e1) {
-			
-			if (dept.getSelectedItem().toString().equals("Choose...")) {
-				readAndWriteFileError();
-				
+
+			if (date.getText().equals("YYYY-MM-DD") || time.getText().equals("HH:MM:SS") || phone.getText().equals("098xxxxxxx")) {
+				JOptionPane.showMessageDialog(null, "Please type all information");
+			} else {
 				JOptionPane.showMessageDialog(null, "Please choose the department");
 			}
 		}

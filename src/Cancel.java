@@ -77,7 +77,7 @@ public class Cancel extends JFrame {
 		logOut.setBounds(1196, 5, 85, 86);
 		cancel.add(logOut);
 		
-		//create create button
+		//create button
 		JButton btn_can = new JButton("");
 		btn_can.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -111,7 +111,7 @@ public class Cancel extends JFrame {
 	}
 	
 	private void createSideBar(JTextField username, JPasswordField password) {
-		//create create side bar button
+		//create "create" sidebar button
 		JButton cre_sb = new JButton("");
 		cre_sb.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -129,7 +129,7 @@ public class Cancel extends JFrame {
 		cre_sb.setBounds(1, 240, 344, 58);
 		cancel.add(cre_sb);
 		
-		//create side bar cancel button
+		//create sidebar cancel button
 		JButton can_sb = new JButton("");
 		can_sb.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -147,7 +147,7 @@ public class Cancel extends JFrame {
 		can_sb.setBounds(1, 376, 344, 58);
 		cancel.add(can_sb);
 		
-		//create side bar view button
+		//create sidebar view button
 		JButton view_sb = new JButton("");
 		view_sb.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -169,10 +169,10 @@ public class Cancel extends JFrame {
 	private void cancelAppointment(JTextField username, JPasswordField password) {
 		//create variable stored password inputted and converted to String
 		String pass_input = new String(password.getPassword());
-		
+
 		//create variable stored select statement
 		String sqlSelect = "SELECT AppID, Appointment.UseName, PatPass FROM Patient INNER JOIN Appointment ON Patient.UseName = Appointment.UseName WHERE Appointment.AppID = " + appointID.getText() + " AND Patient.UseName = " + "'" + username.getText() + "' AND Patient.PatPass = " + "'" + pass_input + "'";
-		
+
 		try {
 			
 			ConDB db = new ConDB();
@@ -181,34 +181,41 @@ public class Cancel extends JFrame {
 			ResultSet rs = con.createStatement().executeQuery(sqlSelect);
 			
 			if (rs.next()) {
-				
-				//**Correct**
-					
+
+				//**correct**
 				Statement stmt = con.createStatement();
-					
+
 				//create variable stored delete statement
 				String sqlDelete = "DELETE FROM Appointment WHERE AppID = " + appointID.getText() + " AND UseName = " + "'" + username.getText() + "'";
-					
+
 				//run delete statement
 				stmt.execute(sqlDelete);
-					
+
 				JOptionPane.showMessageDialog(null, "Cancel Appointment Successfully");
-				
+
 				dispose();
-				
+
 				Home hom = new Home(username, password);
 				hom.setVisible(true);
-				
+
 			} else {
 				//incorrect
 				JOptionPane.showMessageDialog(null, "Incorrect, please try again");
-				
+
 				appointID.setText("");
-				password.setText("");
+				this.password.setText("");
 			}
 			
 		} catch (SQLException e1) {
-			e1.printStackTrace();
+
+			String pass_field = new String(this.password.getPassword());
+
+			if (appointID.getText().equals("") || pass_field.equals("")) {
+				JOptionPane.showMessageDialog(null, "Please type all information");
+			} else {
+				JOptionPane.showMessageDialog(null, "Please type App ID correctly");
+				appointID.setText("");
+			}
 		}
 	}
 }
